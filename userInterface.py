@@ -147,7 +147,7 @@ def clearTerminal():
 def welcome():
         clearTerminal()
         print(
-"""/s
+"""
 Welcome to Hangman, mortal!
 
 Type in /start to start the game now
