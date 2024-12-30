@@ -174,7 +174,7 @@ class UserInterface:
         self.previousStatement = ""
         self.streak = 0
         self.scoreboard = ScoreboardManager()
-        self.player = ""
+        self.player = None
         
 
     def renderGame(self):
@@ -219,7 +219,7 @@ class UserInterface:
                     print(statement)
                     self.previousStatement = statement
                     self.gameState = 2  # Start the game
-                elif len(args) == 1:  # Just /start
+                elif len(args) == 1 and usrInput == "/start":  # Just /start
                     statement = "Welcome! Starting the game without saving your score."
                     print(statement)
                     self.previousStatement = statement
@@ -272,11 +272,12 @@ class UserInterface:
                         self.streak += 1
                         self.gameState = 3  # Transition to End Screen
                 case 3: # Win endscreen
-                    print("Type in /exit to leave and press enter to try a again...")
+                    print("Type in /exit to leave and press enter to play another round...")
                     prevState = 3
                     self.handleInput()
                     if self.gameState == 3:
-                        self.scoreboard.addScore(self.player, self.streak)
+                        if self.player != None:
+                            self.scoreboard.addScore(self.player, self.streak)
                         self.gameState = 4 
                 case 4: # reset
                     self.scoreboard=ScoreboardManager()
